@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💘 CINTA DEWA | Valentine Spesial 💘</title>
+    <style>
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: white;
+        }
+
+        /* CUSTOM CURSOR */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff3366;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: 0.1s;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px #ff3366;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 51, 102, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        /* CANVAS BACKGROUND */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* PRELOADER */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s, visibility 1s;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .heart-loader {
+            width: 100px;
+            height: 100px;
+            background: #ff3366;
+            position: relative;
+            transform: rotate(45deg);
+            animation: heartbeat 1.4s infinite;
+            box-shadow: 0 0 50px #ff3366;
+        }
+
+        .heart-loader::before,
+        .heart-loader::after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: #ff3366;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 50px #ff3366;
+        }
+
+        .heart-loader::before { left: -50px; }
+        .heart-loader::after { top: -50px; }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(45deg) scale(1); }
+            25% { transform: rotate(45deg) scale(1.1); }
+            50% { transform: rotate(45deg) scale(1); }
+            75% { transform: rotate(45deg) scale(1.1); }
+        }
+
+        /* 3D TEXT SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero h1 {
+            font-size: 8em;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: transparent;
+            -webkit-text-stroke: 3px #ff3366;
+            position: relative;
+            animation: floatText 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 51, 102, 0.5);
+            letter-spacing: 10px;
+        }
+
+        .hero h1::before {
+            content: 'VALENTINE';
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #ff3366;
+            -webkit-text-stroke: 0;
+            animation: glitch 3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            transform: translate(-2px, -2px);
+            opacity: 0.8;
+        }
+
+        .hero h1::after {
+            content: 'VALENTINE';
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #00ffff;
+            -webkit-text-stroke: 0;
+            animation: glitch 3s infinite;
+            clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 70%);
+            transform: translate(2px, 2px);
+            opacity: 0.8;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(-5px, 3px); }
+            66% { transform: translate(5px, -3px); }
+        }
+
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            50% { transform: translateY(-20px) rotateX(10deg); }
+        }
+
+        .hero p {
+            font-size: 2em;
+            color: white;
+            margin-top: 30px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            letter-spacing: 5px;
+        }
+
+        /* PARTICLE TEXT */
+        .particle-text {
+            text-align: center;
+            margin: 100px 0;
+        }
+
+        canvas#particleCanvas {
+            width: 100%;
+            height: 400px;
+            background: transparent;
+        }
+
+        /* 3D CARD GRID */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 100px 0;
+            perspective: 2000px;
+        }
+
+        .card-3d {
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            cursor: pointer;
+        }
+
+        .card-3d:hover {
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255, 51, 102, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, rgba(255,51,102,0.2), rgba(255,51,102,0.1));
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #ff3366, #ff6b6b);
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+        .card-front i {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .card-front h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ff3366;
+        }
+
+        .card-back p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* LOVE LETTER WITH PARALLAX */
+        .love-letter-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .letter-parallax {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(5px) brightness(0.3);
+        }
+
+        .love-letter-content {
+            max-width: 800px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            border: 2px solid #ff3366;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 30px 50px rgba(255,51,102,0.3);
+        }
+
+        .love-letter-content h2 {
+            font-size: 3.5em;
+            color: #ff3366;
+            margin-bottom: 30px;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .love-letter-content p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        .love-letter-content p:nth-child(2) { animation-delay: 0.5s; }
+        .love-letter-content p:nth-child(3) { animation-delay: 1s; }
+        .love-letter-content p:nth-child(4) { animation-delay: 1.5s; }
+        .love-letter-content p:nth-child(5) { animation-delay: 2s; }
+        .love-letter-content .signature { animation-delay: 2.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #ff3366;
+            text-align: right;
+            margin-top: 40px;
+        }
+
+        /* TIMELINE INTERAKTIF */
+        .timeline {
+            margin: 150px 0;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #ff3366, #ff6b6b, #ff3366, transparent);
+            box-shadow: 0 0 20px #ff3366;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 100px 0;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1s;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+            transform: translateX(100px);
+        }
+
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #ff3366;
+            position: relative;
+            transition: all 0.5s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(255,51,102,0.3);
+            border-color: #ff6b6b;
+        }
+
+        .timeline-date {
+            font-size: 1.5em;
+            color: #ff3366;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .timeline-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff3366, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            box-shadow: 0 0 30px #ff3366;
+            animation: pulse 2s infinite;
+        }
+
+        /* LOVE METER 3D */
+        .love-meter-3d {
+            margin: 100px 0;
+            text-align: center;
+        }
+
+        .meter-container {
+            width: 100%;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255,51,102,0.3);
+            border: 2px solid #ff3366;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff3366, #ff6b6b, #ff3366);
+            background-size: 200% 100%;
+            width: 0%;
+            border-radius: 25px;
+            transition: width 2s;
+            animation: gradient 3s linear infinite;
+            position: relative;
+            box-shadow: 0 0 30px #ff3366;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .meter-value {
+            font-size: 3em;
+            font-weight: bold;
+            color: #ff3366;
+            text-shadow: 0 0 20px #ff3366;
+            margin-top: 20px;
+        }
+
+        /* INTERAKTIF QUIZ */
+        .quiz-section {
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px;
+            margin: 100px 0;
+            border: 2px solid #ff3366;
+        }
+
+        .quiz-question {
+            font-size: 2em;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .quiz-option {
+            background: rgba(255,51,102,0.1);
+            border: 2px solid #ff3366;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .quiz-option:hover::before {
+            left: 100%;
+        }
+
+        .quiz-option:hover {
+            background: #ff3366;
+            transform: translateX(10px);
+            box-shadow: 0 10px 20px rgba(255,51,102,0.3);
+        }
+
+        .quiz-option.correct {
+            background: #00ff00;
+            border-color: #00ff00;
+            animation: correctPulse 0.5s;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .quiz-feedback {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #ff3366;
+            min-height: 60px;
+        }
+
+        /* GALERI FOTO 3D */
+        .gallery-3d {
+            margin: 150px 0;
+            perspective: 3000px;
+        }
+
+        .gallery-grid-3d {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            transform-style: preserve-3d;
+        }
+
+        .photo-3d {
+            height: 300px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.5s;
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .photo-3d:hover {
+            transform: rotateY(180deg) rotateX(10deg) scale(1.1);
+            z-index: 100;
+        }
+
+        .photo-front, .photo-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+        }
+
+        .photo-front {
+            background: linear-gradient(135deg, #ff3366, #ff6b6b);
+            font-size: 5em;
+            transform: rotateY(0deg);
+        }
+
+        .photo-back {
+            background: linear-gradient(135deg, #333, #000);
+            transform: rotateY(180deg);
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #ff3366;
+        }
+
+        /* MUSIC PLAYER FUTURISTIK */
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff3366, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 30px #ff3366;
+            animation: pulse 2s infinite;
+            transition: all 0.3s;
+            border: 3px solid white;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        .music-btn i {
+            font-size: 2em;
+            color: white;
+        }
+
+        /* RAIN EFFECT */
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-rain {
+            position: absolute;
+            color: #ff3366;
+            font-size: 20px;
+            animation: rain linear forwards;
+            text-shadow: 0 0 10px #ff3366;
+        }
+
+        @keyframes rain {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* TYPING EFFECT */
+        .typing-container {
+            font-size: 2em;
+            margin: 50px 0;
+            color: #ff3366;
+            border-right: 3px solid #ff3366;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 4s steps(40) forwards, blink 0.5s step-end infinite;
+        }
+
+        @keyframes typing {
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3em; }
+            .gallery-grid-3d { grid-template-columns: 1fr; }
+            .quiz-options { grid-template-columns: 1fr; }
+            .timeline::before { left: 30px; }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                transform: translateX(0);
+            }
+            .timeline-content { width: 90%; margin-left: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="heart-loader"></div>
+    </div>
+
+    <!-- CANVAS BACKGROUND -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- RAIN CONTAINER -->
+    <div class="rain-container" id="rainContainer"></div>
+
+    <!-- MUSIC PLAYER -->
+    <div class="music-player">
+        <div class="music-btn" id="musicBtn" onclick="toggleMusic()">
+            <i id="musicIcon">🎵</i>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <h1>VALENTINE</h1>
+            <p>UNTUK CINTA TERSATUKU</p>
+            <div class="typing-container" id="typing"></div>
+        </section>
+
+        <!-- 3D CARDS -->
+        <div class="card-grid">
+            <div class="card-3d">
+                <div class="card-front">
+                    <i>❤️</i>
+                    <h3>For You</h3>
+                </div>
+                <div class="card-back">
+                    <p>Sehat Selalu ya.</p>
+                </div>
+            </div>
+            <div class="card-3d">
+                <div class="card-front">
+                    <i>💖</i>
+                    <h3>Kasih Sayang</h3>
+                </div>
+                <div class="card-back">
+                    <p>Setiap detik bersamamu adalah anugerah terindah dalam hidupku.</p>
+                </div>
+            </div>
+            <div class="card-3d">
+                <div class="card-front">
+                    <i>💝</i>
+                    <h3>Pengorbanan</h3>
+                </div>
+                <div class="card-back">
+                    <p>Aku rela melakukan apapun untuk melihat senyum indahmu.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOVE LETTER SECTION -->
+        <section class="love-letter-section">
+            <div class="love-letter-content">
+                <h2>Surat Cinta untukmu</h2>
+                <p>Sayangku,</p>
+                <p>Di hari Valentine yang spesial ini, aku ingin kamu tahu bahwa kamu adalah hadiah terindah yang pernah Tuhan berikan dalam hidupku. Setiap hari bersamamu adalah petualangan yang luar biasa, setiap senyummu adalah sinar matahari yang menerangi hariku, dan setiap suara tawamu sperti hujan di malam hari yang menengkan hatiku walaupun mirip seperti nge lap kaca sih.</p>
+                <p>Aku masih ingat pertama kali kita bertemu. Waktu seakan berhenti dan dunia hanya milik kita berdua soalnya fanny ku terlalu jago hehe. Sejak saat itu, aku tahu bahwa kamu adalah orang yang selama ini aku cari. Kamu melengkapi segala kekuranganku, kamu mengisi segala kekosongan di hatiku.</p>
+                <p>Bersamamu, aku belajar tentang arti cinta sejati. Cinta yang tulus, cinta yang sabar, cinta yang selalu berusaha memberikan yang terbaik. Kamu mengajarkanku bahwa cinta bukan hanya tentang kebahagiaan, tapi juga tentang pengertian, kepercayaan, dan kesetiaan.</p>
+                <p>Aku berjanji akan selalu menjagamu, melindungimu, dan mencintaimu dengan segenap jiwa ragaku walaupun itu semua sudah terlambat, terima kasih qinan.</p>
+                <div class="signature">Dari seseorang yang pernah sangat mencintaimu walupun itu dulu dan sekarang pun masih tatap sama ❤️</div>
+            </div>
+        </section>
+
+        <!-- TIMELINE INTERAKTIF -->
+        <section class="timeline">
+            <h2 style="text-align: center; font-size: 3em; color: #ff3366; margin-bottom: 80px;">Perjalanan Cinta Kita</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">14 Februari 2024</div>
+                    <h3>Pertama Bertemu</h3>
+                    <p>di litmatch dan bermain ml menggunakan fanny exp dan kamu terkesan dengan fanny exp ku. benerkan????.</p>
+                </div>
+                <div class="timeline-icon">💑</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">lupa tanggal berapa hehe</div>
+                    <h3>Pertama Kali Sleep Call</h3>
+                    <p>gua gak tau kenapa gua punya keberanian pada saat itu buat minta nomor wa mu tapi ya gitulah gua.</p>
+                </div>
+                <div class="timeline-icon">🌅</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Maaf ya gua lupa tanggal berapa kita jadian</div>
+                    <h3>Jadian</h3>
+                    <p>Keputusan yang lumayan berat untuk diambil, tapi aku tidak menyesal karena kamu adalah orang yang paling aku cintai.</p>
+                </div>
+                <div class="timeline-icon">💍</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Sekarang</div>
+                    <h3>Berakhir</h3>
+                    <p>pada akhirnya kita memutuskan untuk berhenti menjalin hubungan, gua tau gua emang susah buat mengikuti apa yang kamu inginkan tapi gua tetap mencintaimu walaupun itu tidak bisa untuk mempertahankan hubungan kita. Setiap hari bersamamu adalah hari yang spesial.</p>
+                </div>
+                <div class="timeline-icon">∞</div>
+            </div>
+        </section>
+
+        <!-- LOVE METER 3D -->
+        <section class="love-meter-3d">
+            <h2 style="font-size: 2.5em; color: #ff3366;">Love Meter</h2>
+            <div class="meter-container">
+                <div class="meter-fill" id="loveMeter" style="width: 0%;"></div>
+            </div>
+            <div class="meter-value" id="loveValue">0%</div>
+            <p style="color: white; font-size: 1.2em;">Cintaku padamu nggak terhingga! 💖</p>
+        </section>
+
+        <!-- QUIZ INTERAKTIF -->
+        <section class="quiz-section">
+            <h2 style="font-size: 2.5em; color: #ff3366; margin-bottom: 40px;">Love Quiz 💭</h2>
+            <div class="quiz-question" id="quizQuestion">Masih cinta abul?</div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="checkAnswer(this, 'Iya')">Iya</div>
+                <div class="quiz-option" onclick="checkAnswer(this, 'tidak')">tidak</div>
+                <div class="quiz-option" onclick="checkAnswer(this, 'Ya Jelas Tidak')">Ya Jelas Tidak</div>
+                <div class="quiz-option" onclick="checkAnswer(this, 'Najis')">Najis</div>
+            </div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+        </section>
+
+        <!-- GALERI 3D -->
+        <section class="gallery-3d">
+            <h2 style="text-align: center; font-size: 2.5em; color: #ff3366; margin-bottom: 50px;">Kenangan Manis</h2>
+            <div class="gallery-grid-3d">
+                <div class="photo-3d" onclick="showPhotoMessage(1)">
+                    <div class="photo-front">📸 1</div>
+                    <div class="photo-back">
+                        <h3>First Photo</h3>
+                        <img src="../valentine-day/image/image.png" alt="404">
+                    </div>
+                </div>
+                <div class="photo-3d" onclick="showPhotoMessage(2)">
+                    <div class="photo-front">📸 2</div>
+                    <div class="photo-back">
+                        <h3>Second Photo</h3>
+                        <img src="../valentine-day/image/image copy 2.png" alt="404">
+                    </div>
+                </div>
+                <div class="photo-3d" onclick="showPhotoMessage(3)">
+                    <div class="photo-front">📸 3</div>
+                    <div class="photo-back">
+                        <h3>Third Photo</h3>
+                        <img src="../valentine-day/image/image copy 3.png" alt="404">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // PRELOADER
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // CUSTOM CURSOR
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // CANVAS BACKGROUND INTERAKTIF
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.color = `rgba(255, 51, 102, ${Math.random() * 0.5})`;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Gambar garis antar partikel
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 51, 102, ${0.1 - distance/1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        // RESIZE CANVAS
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // HEART RAIN EFFECT
+        function createHeartRain() {
+            const container = document.getElementById('rainContainer');
+            const heart = document.createElement('div');
+            heart.className = 'heart-rain';
+            heart.innerHTML = ['❤️', '💖', '💕', '💗', '💓', '💘', '💝'][Math.floor(Math.random() * 7)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            container.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeartRain, 200);
+
+        // TYPING EFFECT
+        const texts = [
+            "Aku Sayang Kamu! ❤️",
+            "Kamu Cantik Banget! 💖",
+            "My Everything! 💕",
+            "I Love You! 💗",
+            "You're Perfect! 💘"
+        ];
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typing');
+
+        function typeEffect() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(typeEffect, 500);
+            } else {
+                setTimeout(typeEffect, isDeleting ? 100 : 200);
+            }
+        }
+
+        typeEffect();
+
+        // LOVE METER ANIMATION
+        setTimeout(() => {
+            const meter = document.getElementById('loveMeter');
+            const value = document.getElementById('loveValue');
+            let width = 0;
+            
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                } else {
+                    width += 2;
+                    meter.style.width = width + '%';
+                    value.textContent = width + '%';
+                }
+            }, 50);
+        }, 1000);
+
+        // QUIZ FUNCTION
+        function checkAnswer(element, answer) {
+            const correctAnswer = 'Iya';
+            const feedback = document.getElementById('quizFeedback');
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => opt.classList.remove('correct'));
+            
+            if (answer === correctAnswer) {
+                element.classList.add('correct');
+                feedback.innerHTML = 'Apakah Aku Masih Mempunyai Peluang? ❤️';
+                createConfetti();
+            } else {
+                feedback.innerHTML = 'Jadi Begitu Ya...? 😢';
+            }
+        }
+
+        // CONFETTI FUNCTION
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.color = ['#ff3366', '#ff6b6b', '#ffb6c1', '#ffffff'][Math.floor(Math.random() * 4)];
+                    confetti.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.innerHTML = ['❤️', '💖', '💕', '💗', '✨', '⭐'][Math.floor(Math.random() * 6)];
+                    confetti.style.animation = `confettiFall ${Math.random() * 2 + 1}s linear`;
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 10);
+            }
+        }
+
+        // Add confetti animation style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFall {
+                0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // PHOTO MESSAGE
+        function showPhotoMessage(photoId) {
+            const messages = {
+                1: "Gua suka bajunya! 📸",
+                2: "Cocok kalo ada kumis kamunya! 😂",
+                3: "cantik banget! 💕"
+            };
+            alert(messages[photoId]);
+        }
+
+        // MUSIC TOGGLE
+        let isPlaying = false;
+        let audioCtx;
+
+        function toggleMusic() {
+            const icon = document.getElementById('musicIcon');
+            
+            if (!isPlaying) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Play a simple melody
+                const now = audioCtx.currentTime;
+                const frequencies = [523.25, 659.25, 783.99, 1046.50, 783.99, 659.25, 523.25];
+                const durations = [0.3, 0.3, 0.3, 0.6, 0.3, 0.3, 0.6];
+
+                frequencies.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+
+                    gain.gain.setValueAtTime(0.1, now + i * 0.3);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + durations[i]);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(now + i * 0.3);
+                    osc.stop(now + i * 0.3 + durations[i]);
+                });
+
+                icon.textContent = '🔊';
+                isPlaying = true;
+
+                // Loop the melody
+                setTimeout(() => {
+                    if (isPlaying) toggleMusic();
+                }, 3000);
+            } else {
+                audioCtx.close();
+                icon.textContent = '🎵';
+                isPlaying = false;
+            }
+        }
+
+        // SCROLL ANIMATION
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // HOVER EFFECT 3D
+        document.querySelectorAll('.card-3d').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 20;
+                const angleY = (centerX - x) / 20;
+                
+                card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0) rotateY(0)';
+            });
+        });
+
+        // WELCOME MESSAGE
+        setTimeout(() => {
+            alert("💝 Selamat Datang Qinan! 💝\nHappy Valentine's Day!");
+        }, 3000);
+    </script>
+</body>
+</html>
