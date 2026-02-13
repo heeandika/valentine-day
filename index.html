@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,14 +106,32 @@
             box-shadow: 0 0 50px #ff3366;
         }
 
-        .heart-loader::before { left: -50px; }
-        .heart-loader::after { top: -50px; }
+        .heart-loader::before {
+            left: -50px;
+        }
+
+        .heart-loader::after {
+            top: -50px;
+        }
 
         @keyframes heartbeat {
-            0%, 100% { transform: rotate(45deg) scale(1); }
-            25% { transform: rotate(45deg) scale(1.1); }
-            50% { transform: rotate(45deg) scale(1); }
-            75% { transform: rotate(45deg) scale(1.1); }
+
+            0%,
+            100% {
+                transform: rotate(45deg) scale(1);
+            }
+
+            25% {
+                transform: rotate(45deg) scale(1.1);
+            }
+
+            50% {
+                transform: rotate(45deg) scale(1);
+            }
+
+            75% {
+                transform: rotate(45deg) scale(1.1);
+            }
         }
 
         /* 3D TEXT SECTION */
@@ -165,21 +184,38 @@
         }
 
         @keyframes glitch {
-            0%, 100% { transform: translate(0); }
-            33% { transform: translate(-5px, 3px); }
-            66% { transform: translate(5px, -3px); }
+
+            0%,
+            100% {
+                transform: translate(0);
+            }
+
+            33% {
+                transform: translate(-5px, 3px);
+            }
+
+            66% {
+                transform: translate(5px, -3px);
+            }
         }
 
         @keyframes floatText {
-            0%, 100% { transform: translateY(0) rotateX(0); }
-            50% { transform: translateY(-20px) rotateX(10deg); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotateX(0);
+            }
+
+            50% {
+                transform: translateY(-20px) rotateX(10deg);
+            }
         }
 
         .hero p {
             font-size: 2em;
             color: white;
             margin-top: 30px;
-            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
             letter-spacing: 5px;
         }
 
@@ -216,7 +252,8 @@
             transform: rotateY(180deg) scale(1.1);
         }
 
-        .card-front, .card-back {
+        .card-front,
+        .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -228,13 +265,13 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             border: 2px solid rgba(255, 51, 102, 0.3);
             backdrop-filter: blur(10px);
         }
 
         .card-front {
-            background: linear-gradient(135deg, rgba(255,51,102,0.2), rgba(255,51,102,0.1));
+            background: linear-gradient(135deg, rgba(255, 51, 102, 0.2), rgba(255, 51, 102, 0.1));
             transform: rotateY(0deg);
         }
 
@@ -281,15 +318,15 @@
         }
 
         .love-letter-content {
-            max-width: 800px;
-            background: rgba(0,0,0,0.7);
+            max-width: 1550px;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 50px;
             border: 2px solid #ff3366;
             transform-style: preserve-3d;
             animation: float 6s ease-in-out infinite;
-            box-shadow: 0 30px 50px rgba(255,51,102,0.3);
+            box-shadow: 0 30px 50px rgba(255, 51, 102, 0.3);
         }
 
         .love-letter-content h2 {
@@ -308,11 +345,25 @@
             animation: fadeInUp 0.5s forwards;
         }
 
-        .love-letter-content p:nth-child(2) { animation-delay: 0.5s; }
-        .love-letter-content p:nth-child(3) { animation-delay: 1s; }
-        .love-letter-content p:nth-child(4) { animation-delay: 1.5s; }
-        .love-letter-content p:nth-child(5) { animation-delay: 2s; }
-        .love-letter-content .signature { animation-delay: 2.5s; }
+        .love-letter-content p:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .love-letter-content p:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .love-letter-content p:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        .love-letter-content p:nth-child(5) {
+            animation-delay: 2s;
+        }
+
+        .love-letter-content .signature {
+            animation-delay: 2.5s;
+        }
 
         @keyframes fadeInUp {
             to {
@@ -372,7 +423,7 @@
 
         .timeline-content {
             width: 45%;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
@@ -383,7 +434,7 @@
 
         .timeline-content:hover {
             transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(255,51,102,0.3);
+            box-shadow: 0 20px 40px rgba(255, 51, 102, 0.3);
             border-color: #ff6b6b;
         }
 
@@ -416,12 +467,12 @@
         .meter-container {
             width: 100%;
             height: 50px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 25px;
             margin: 30px 0;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(255,51,102,0.3);
+            box-shadow: 0 0 30px rgba(255, 51, 102, 0.3);
             border: 2px solid #ff3366;
         }
 
@@ -438,9 +489,17 @@
         }
 
         @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .meter-value {
@@ -453,7 +512,7 @@
 
         /* INTERAKTIF QUIZ */
         .quiz-section {
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 60px;
@@ -474,7 +533,7 @@
         }
 
         .quiz-option {
-            background: rgba(255,51,102,0.1);
+            background: rgba(255, 51, 102, 0.1);
             border: 2px solid #ff3366;
             border-radius: 15px;
             padding: 20px;
@@ -494,7 +553,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -505,7 +564,7 @@
         .quiz-option:hover {
             background: #ff3366;
             transform: translateX(10px);
-            box-shadow: 0 10px 20px rgba(255,51,102,0.3);
+            box-shadow: 0 10px 20px rgba(255, 51, 102, 0.3);
         }
 
         .quiz-option.correct {
@@ -515,8 +574,15 @@
         }
 
         @keyframes correctPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .quiz-feedback {
@@ -549,12 +615,8 @@
             overflow: hidden;
         }
 
-        .photo-3d:hover {
-            transform: rotateY(180deg) rotateX(10deg) scale(1.1);
-            z-index: 100;
-        }
-
-        .photo-front, .photo-back {
+        .photo-front,
+        .photo-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -649,28 +711,49 @@
         }
 
         @keyframes typing {
-            to { width: 100%; }
+            to {
+                width: 100%;
+            }
         }
 
         @keyframes blink {
-            50% { border-color: transparent; }
+            50% {
+                border-color: transparent;
+            }
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3em; }
-            .gallery-grid-3d { grid-template-columns: 1fr; }
-            .quiz-options { grid-template-columns: 1fr; }
-            .timeline::before { left: 30px; }
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            .gallery-grid-3d {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
             .timeline-item,
             .timeline-item:nth-child(even) {
                 flex-direction: column;
                 transform: translateX(0);
             }
-            .timeline-content { width: 90%; margin-left: 50px; }
+
+            .timeline-content {
+                width: 90%;
+                margin-left: 50px;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- CUSTOM CURSOR -->
     <div class="cursor"></div>
@@ -699,7 +782,7 @@
         <!-- HERO SECTION -->
         <section class="hero">
             <h1>VALENTINE</h1>
-            <p>UNTUK CINTA TERSATUKU</p>
+            <p>UNTUK QINAN</p>
             <div class="typing-container" id="typing"></div>
         </section>
 
@@ -737,25 +820,36 @@
         <!-- LOVE LETTER SECTION -->
         <section class="love-letter-section">
             <div class="love-letter-content">
-                <h2>Surat Cinta untukmu</h2>
-                <p>Sayangku,</p>
-                <p>Di hari Valentine yang spesial ini, aku ingin kamu tahu bahwa kamu adalah hadiah terindah yang pernah Tuhan berikan dalam hidupku. Setiap hari bersamamu adalah petualangan yang luar biasa, setiap senyummu adalah sinar matahari yang menerangi hariku, dan setiap suara tawamu sperti hujan di malam hari yang menengkan hatiku walaupun mirip seperti nge lap kaca sih.</p>
-                <p>Aku masih ingat pertama kali kita bertemu. Waktu seakan berhenti dan dunia hanya milik kita berdua soalnya fanny ku terlalu jago hehe. Sejak saat itu, aku tahu bahwa kamu adalah orang yang selama ini aku cari. Kamu melengkapi segala kekuranganku, kamu mengisi segala kekosongan di hatiku.</p>
-                <p>Bersamamu, aku belajar tentang arti cinta sejati. Cinta yang tulus, cinta yang sabar, cinta yang selalu berusaha memberikan yang terbaik. Kamu mengajarkanku bahwa cinta bukan hanya tentang kebahagiaan, tapi juga tentang pengertian, kepercayaan, dan kesetiaan.</p>
-                <p>Aku berjanji akan selalu menjagamu, melindungimu, dan mencintaimu dengan segenap jiwa ragaku walaupun itu semua sudah terlambat, terima kasih qinan.</p>
-                <div class="signature">Dari seseorang yang pernah sangat mencintaimu walupun itu dulu dan sekarang pun masih tatap sama ❤️</div>
+                <h2>Surat untukmu</h2>
+                <p>Qinan,</p>
+                <p>Di hari Valentine yang spesial ini, aku ingin kamu tahu bahwa kamu adalah hadiah terindah yang pernah
+                    Tuhan berikan dalam hidupku. Setiap hari bersamamu adalah petualangan yang luar biasa, setiap
+                    senyummu adalah sinar matahari yang menerangi hariku, dan setiap suara tawamu sperti hujan di malam
+                    hari yang menengkan hatiku walaupun mirip seperti nge lap kaca sih.</p>
+                <p>Aku masih ingat pertama kali kita bertemu. Waktu seakan berhenti dan dunia hanya milik kita berdua
+                    soalnya fanny ku terlalu jago hehe. Sejak saat itu, aku tahu bahwa kamu adalah orang yang selama ini
+                    aku cari. Kamu melengkapi segala kekuranganku, kamu mengisi segala kekosongan di hatiku.</p>
+                <p>Bersamamu, aku belajar tentang arti cinta sejati. Cinta yang tulus, cinta yang sabar, cinta yang
+                    selalu berusaha memberikan yang terbaik. Kamu mengajarkanku bahwa cinta bukan hanya tentang
+                    kebahagiaan, tapi juga tentang pengertian, kepercayaan, dan kesetiaan.</p>
+                <p>Aku berjanji akan selalu menjagamu, melindungimu, dan mencintaimu dengan segenap jiwa ragaku walaupun
+                    itu semua sudah terlambat, terima kasih qinan.</p>
+                <div class="signature">Dari seseorang yang pernah sangat mencintaimu walupun itu dulu dan sekarang pun
+                    masih tatap sama ❤️</div>
             </div>
         </section>
 
         <!-- TIMELINE INTERAKTIF -->
         <section class="timeline">
-            <h2 style="text-align: center; font-size: 3em; color: #ff3366; margin-bottom: 80px;">Perjalanan Cinta Kita</h2>
-            
+            <h2 style="text-align: center; font-size: 3em; color: #ff3366; margin-bottom: 80px;">Perjalanan Cinta Kita
+            </h2>
+
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="timeline-date">14 Februari 2024</div>
                     <h3>Pertama Bertemu</h3>
-                    <p>di litmatch dan bermain ml menggunakan fanny exp dan kamu terkesan dengan fanny exp ku. benerkan????.</p>
+                    <p>di litmatch dan bermain ml menggunakan fanny exp dan kamu terkesan dengan fanny exp ku.
+                        benerkan????.</p>
                 </div>
                 <div class="timeline-icon">💑</div>
             </div>
@@ -764,7 +858,8 @@
                 <div class="timeline-content">
                     <div class="timeline-date">lupa tanggal berapa hehe</div>
                     <h3>Pertama Kali Sleep Call</h3>
-                    <p>gua gak tau kenapa gua punya keberanian pada saat itu buat minta nomor wa mu tapi ya gitulah gua.</p>
+                    <p>gua gak tau kenapa gua punya keberanian pada saat itu buat minta nomor wa mu tapi ya gitulah gua.
+                    </p>
                 </div>
                 <div class="timeline-icon">🌅</div>
             </div>
@@ -773,7 +868,8 @@
                 <div class="timeline-content">
                     <div class="timeline-date">Maaf ya gua lupa tanggal berapa kita jadian</div>
                     <h3>Jadian</h3>
-                    <p>Keputusan yang lumayan berat untuk diambil, tapi aku tidak menyesal karena kamu adalah orang yang paling aku cintai.</p>
+                    <p>Keputusan yang lumayan berat untuk diambil, tapi aku tidak menyesal karena kamu adalah orang yang
+                        paling aku cintai.</p>
                 </div>
                 <div class="timeline-icon">💍</div>
             </div>
@@ -782,7 +878,9 @@
                 <div class="timeline-content">
                     <div class="timeline-date">Sekarang</div>
                     <h3>Berakhir</h3>
-                    <p>pada akhirnya kita memutuskan untuk berhenti menjalin hubungan, gua tau gua emang susah buat mengikuti apa yang kamu inginkan tapi gua tetap mencintaimu walaupun itu tidak bisa untuk mempertahankan hubungan kita. Setiap hari bersamamu adalah hari yang spesial.</p>
+                    <p>pada akhirnya kita memutuskan untuk berhenti menjalin hubungan, gua tau gua emang susah buat
+                        mengikuti apa yang kamu inginkan tapi gua tetap mencintaimu walaupun itu tidak bisa untuk
+                        mempertahankan hubungan kita. Setiap hari bersamamu adalah hari yang spesial.</p>
                 </div>
                 <div class="timeline-icon">∞</div>
             </div>
@@ -816,24 +914,31 @@
             <h2 style="text-align: center; font-size: 2.5em; color: #ff3366; margin-bottom: 50px;">Kenangan Manis</h2>
             <div class="gallery-grid-3d">
                 <div class="photo-3d" onclick="showPhotoMessage(1)">
-                    <div class="photo-front">📸 1</div>
+                    <div class="photo-front">
+                        <img src="qinan.png" alt="Photo 1" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
                     <div class="photo-back">
                         <h3>First Photo</h3>
-                        <img src="../valentine-day/image/image.png" alt="404">
                     </div>
                 </div>
+
+                <!-- Foto 2 -->
                 <div class="photo-3d" onclick="showPhotoMessage(2)">
-                    <div class="photo-front">📸 2</div>
+                    <div class="photo-front">
+                        <img src="qinan2.png" alt="Photo 2" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
                     <div class="photo-back">
                         <h3>Second Photo</h3>
-                        <img src="../valentine-day/image/image copy 2.png" alt="404">
                     </div>
                 </div>
+
+                <!-- Foto 3 -->
                 <div class="photo-3d" onclick="showPhotoMessage(3)">
-                    <div class="photo-front">📸 3</div>
+                    <div class="photo-front">
+                        <img src="qinan3.png" alt="Photo 3" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
                     <div class="photo-back">
-                        <h3>Third Photo</h3>
-                        <img src="../valentine-day/image/image copy 3.png" alt="404">
+                        <h3>Third Photo</h3>>
                     </div>
                 </div>
             </div>
@@ -842,7 +947,7 @@
 
     <script>
         // PRELOADER
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             setTimeout(() => {
                 document.getElementById('preloader').classList.add('hidden');
             }, 2000);
@@ -855,7 +960,7 @@
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
-            
+
             setTimeout(() => {
                 follower.style.left = e.clientX + 'px';
                 follower.style.top = e.clientY + 'px';
@@ -865,7 +970,7 @@
         // CANVAS BACKGROUND INTERAKTIF
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
-        
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -907,7 +1012,7 @@
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             // Gambar garis antar partikel
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
@@ -916,7 +1021,7 @@
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < 100) {
-                        ctx.strokeStyle = `rgba(255, 51, 102, ${0.1 - distance/1000})`;
+                        ctx.strokeStyle = `rgba(255, 51, 102, ${0.1 - distance / 1000})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
@@ -970,7 +1075,7 @@
             "I Love You! 💗",
             "You're Perfect! 💘"
         ];
-        
+
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -978,7 +1083,7 @@
 
         function typeEffect() {
             const currentText = texts[textIndex];
-            
+
             if (isDeleting) {
                 typingElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
@@ -1006,7 +1111,7 @@
             const meter = document.getElementById('loveMeter');
             const value = document.getElementById('loveValue');
             let width = 0;
-            
+
             const interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
@@ -1023,9 +1128,9 @@
             const correctAnswer = 'Iya';
             const feedback = document.getElementById('quizFeedback');
             const options = document.querySelectorAll('.quiz-option');
-            
+
             options.forEach(opt => opt.classList.remove('correct'));
-            
+
             if (answer === correctAnswer) {
                 element.classList.add('correct');
                 feedback.innerHTML = 'Apakah Aku Masih Mempunyai Peluang? ❤️';
@@ -1050,7 +1155,7 @@
                     confetti.innerHTML = ['❤️', '💖', '💕', '💗', '✨', '⭐'][Math.floor(Math.random() * 6)];
                     confetti.style.animation = `confettiFall ${Math.random() * 2 + 1}s linear`;
                     document.body.appendChild(confetti);
-                    
+
                     setTimeout(() => confetti.remove(), 3000);
                 }, i * 10);
             }
@@ -1079,44 +1184,50 @@
         // MUSIC TOGGLE
         let isPlaying = false;
         let audioCtx;
+        let loopTimeout;
+
+        // helper: play one sequence of the melody and schedule next play
+        function playMelody() {
+            const now = audioCtx.currentTime;
+            const frequencies = [523.25, 659.25, 783.99, 1046.50, 783.99, 659.25, 523.25];
+            const durations = [0.3, 0.3, 0.3, 0.6, 0.3, 0.3, 0.6];
+
+            frequencies.forEach((freq, i) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+
+                gain.gain.setValueAtTime(0.1, now + i * 0.3);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + durations[i]);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now + i * 0.3);
+                osc.stop(now + i * 0.3 + durations[i]);
+            });
+
+            // schedule next play only if still playing
+            loopTimeout = setTimeout(() => {
+                if (isPlaying) playMelody();
+            }, 3000);
+        }
 
         function toggleMusic() {
             const icon = document.getElementById('musicIcon');
-            
+
             if (!isPlaying) {
+                // start audio context and begin loop
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Play a simple melody
-                const now = audioCtx.currentTime;
-                const frequencies = [523.25, 659.25, 783.99, 1046.50, 783.99, 659.25, 523.25];
-                const durations = [0.3, 0.3, 0.3, 0.6, 0.3, 0.3, 0.6];
-
-                frequencies.forEach((freq, i) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-
-                    osc.type = 'sine';
-                    osc.frequency.value = freq;
-
-                    gain.gain.setValueAtTime(0.1, now + i * 0.3);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.3 + durations[i]);
-
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-
-                    osc.start(now + i * 0.3);
-                    osc.stop(now + i * 0.3 + durations[i]);
-                });
-
+                playMelody();
                 icon.textContent = '🔊';
                 isPlaying = true;
-
-                // Loop the melody
-                setTimeout(() => {
-                    if (isPlaying) toggleMusic();
-                }, 3000);
             } else {
-                audioCtx.close();
+                // stop the loop and close context
+                clearTimeout(loopTimeout);
+                if (audioCtx) audioCtx.close();
                 icon.textContent = '🎵';
                 isPlaying = false;
             }
@@ -1141,13 +1252,13 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const angleX = (y - centerY) / 20;
                 const angleY = (centerX - x) / 20;
-                
+
                 card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
             });
 
@@ -1162,4 +1273,5 @@
         }, 3000);
     </script>
 </body>
+
 </html>
