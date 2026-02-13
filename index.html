@@ -298,79 +298,94 @@
             line-height: 1.6;
         }
 
-        /* LOVE LETTER WITH PARALLAX */
-        .love-letter-section {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .letter-parallax {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: blur(5px) brightness(0.3);
-        }
-
+    /* Font yang jelas dan besar */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&family=Open+Sans:wght@400;600;700&display=swap');
+    
+    /* Love letter container */
+    .love-letter-section {
+        width: 100%;
+        min-height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+    
+    .love-letter-content {
+        scrollbar-width: thin;
+        scrollbar-color: #ff3366 #ffe6e6;
+    }
+    
+    /* Custom scrollbar */
+    .love-letter-content::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    .love-letter-content::-webkit-scrollbar-track {
+        background: #ffe6e6;
+        border-radius: 10px;
+    }
+    
+    .love-letter-content::-webkit-scrollbar-thumb {
+        background: #ff3366;
+        border-radius: 10px;
+    }
+    
+    /* RESPONSIF UNTUK SEMUA LAYAR */
+    @media screen and (max-width: 768px) {
         .love-letter-content {
-            max-width: 1550px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 50px;
-            border: 2px solid #ff3366;
-            transform-style: preserve-3d;
-            animation: float 6s ease-in-out infinite;
-            box-shadow: 0 30px 50px rgba(255, 51, 102, 0.3);
+            padding: 30px !important;
+            max-height: 75vh;
         }
-
+        
         .love-letter-content h2 {
-            font-size: 3.5em;
-            color: #ff3366;
-            margin-bottom: 30px;
-            font-family: 'Dancing Script', cursive;
+            font-size: 36px !important;
         }
-
-        .love-letter-content p {
-            font-size: 1.3em;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.5s forwards;
+        
+        .letter-body {
+            font-size: 18px !important;
         }
-
-        .love-letter-content p:nth-child(2) {
-            animation-delay: 0.5s;
+        
+        .letter-body p {
+            font-size: 18px !important;
+            margin-bottom: 20px !important;
         }
-
-        .love-letter-content p:nth-child(3) {
-            animation-delay: 1s;
+        
+        .letter-body div[style*="font-family: 'Dancing Script'"] {
+            font-size: 28px !important;
         }
-
-        .love-letter-content p:nth-child(4) {
-            animation-delay: 1.5s;
+    }
+    
+    @media screen and (max-width: 480px) {
+        .love-letter-content {
+            padding: 20px !important;
+            max-height: 70vh;
         }
-
-        .love-letter-content p:nth-child(5) {
-            animation-delay: 2s;
+        
+        .love-letter-content h2 {
+            font-size: 30px !important;
         }
-
-        .love-letter-content .signature {
-            animation-delay: 2.5s;
+        
+        .letter-body {
+            font-size: 16px !important;
         }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        .letter-body p {
+            font-size: 16px !important;
+            line-height: 1.6 !important;
         }
+        
+        .letter-body div[style*="font-family: 'Dancing Script'"] {
+            font-size: 24px !important;
+        }
+    }
+    
+    /* Landscape mode */
+    @media screen and (orientation: landscape) and (max-height: 600px) {
+        .love-letter-content {
+            max-height: 85vh;
+        }
+    }
 
         .signature {
             font-family: 'Dancing Script', cursive;
@@ -818,8 +833,24 @@
         </div>
 
         <!-- LOVE LETTER SECTION -->
-        <section class="love-letter-section">
-            <div class="love-letter-content">
+        <section class="love-letter-section" style="
+    margin: 50px auto;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;">
+            <div class="love-letter-content"
+                style="
+        backdrop-filter: blur(10px);
+        border-radius: 30px;
+        padding: 50px;
+        margin: 20px auto;
+        box-shadow: 0 20px 60px rgba(255,51,102,0.3);
+        border: 3px solid #ff3366;
+        max-width: 900px;
+        width: calc(100% - 40px);
+        overflow-y: auto;
+        max-height: 80vh;
+        box-sizing: border-box;">
                 <h2>Surat untukmu</h2>
                 <p>Qinan,</p>
                 <p>Di hari Valentine yang spesial ini, aku ingin kamu tahu bahwa kamu adalah hadiah terindah yang pernah
